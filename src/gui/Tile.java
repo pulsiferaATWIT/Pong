@@ -7,9 +7,14 @@ public class Tile extends Rectangle {
         super(x, y, 10, 10);
     }
 
-    public void move(int deltaX, int deltaY) {
+    public void move(double deltaX, double deltaY) {
         this.setX(this.getX() + deltaX);
         this.setY(this.getY() + deltaY);
         this.relocate(this.getX(), this.getY());
+    }
+
+    public void reset() {
+        this.setX(625);
+        this.setY(300);
     }
 }
