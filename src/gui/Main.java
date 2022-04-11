@@ -37,6 +37,11 @@ public class Main extends Application {
                     yDirection *= -1;
                 if (ball.getX() < 0 || ball.getX() > 1240)
                     xDirection *= -1;
+
+                if (player1.isIntersecting(ball) || player2.isIntersecting(ball)) {
+                    xDirection *= -1;
+                    ball.move(xDirection * 3, 0);
+                }
             }
         };
 
