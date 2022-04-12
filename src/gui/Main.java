@@ -3,10 +3,10 @@ package gui;
 import javafx.application.Application;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,6 +32,16 @@ public class Main extends Application {
         Line centerLine = new Line(scene.getWidth() / 2, 0, scene.getWidth() / 2, scene.getHeight());
         centerLine.setStroke(Color.WHITE);
         root.getChildren().add(centerLine);
+
+        Text score1 = new Text(scene.getWidth() / 2 + 15, 40, "0");
+        score1.setFont(new Font(30));
+        score1.setFill(Color.WHITE);
+
+        Text score2 = new Text(scene.getWidth() / 2 - 30, 40, "0");
+        score2.setFont(new Font(30));
+        score2.setFill(Color.WHITE);
+
+        root.getChildren().addAll(score1, score2);
 
         Paddle player1 = new Paddle(scene.getWidth() - 150, 150, root, Color.WHITE);
         Paddle player2 = new Paddle(150, 250, root, Color.WHITE);
@@ -63,29 +73,38 @@ public class Main extends Application {
                 if (player1.isIntersecting(ball) || player2.isIntersecting(ball)) { // Paddle collision detection
                     xDirection *= -1;
                     ball.move(xDirection * 3, 0);
-                    ballSpeed += 0.1;
+                    ballSpeed *= 1.1;
                 }
+
+                // Updates Text
+                score1.setText(String.format("%d", player1Score));
+                score2.setText(String.format("%d", player2Score));
             }
         };
 
-        scene.setOnKeyPressed(event -> {
+        scene.setOnKeyPressed(event -> { // Movement for player 2
             switch(event.getCode()) {
                 case W: player2.movePaddle(-10); break;
                 case S: player2.movePaddle(10); break;
+                case H: player1Score++; break;
                 default: break;
             }
         });
 
-        scene.setOnMouseMoved(event -> {
+        scene.setOnMouseMoved(event -> { // Movement for player 1
             if (event.getY() > player1.getY())
                 player1.movePaddle(5);
 
             if (event.getY() < player1.getY())
                 player1.movePaddle(-5);
+
+            if (player1Score == 11 || player2Score == 11)
+                gameLoop.stop();
         });
 
-        gameLoop.start();
+        gameLoop.start(); // Starts ball movement
 
+        primaryStage.setResizable(false); // Fix window size
         primaryStage.setTitle("Pong");
         primaryStage.setScene(scene);
         primaryStage.show();
