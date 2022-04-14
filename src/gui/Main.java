@@ -54,7 +54,6 @@ public class Main extends Application {
 
                     if (ball.getX() < 0) { // Checks if ball is scored for player 1
                         xDirection *= -1;
-//                        yDirection = (1 - ((1 - (gen.nextInt(2) * 2)) * gen.nextInt(2) * 2));
                         ball.reset();
                         ballSpeed = 1;
                         player1Score++;
