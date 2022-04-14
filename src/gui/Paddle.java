@@ -3,9 +3,12 @@ package gui;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 public class Paddle {
     final static int LENGTH = 11;
     Tile[] tiles = new Tile[LENGTH];
+    ArrayList<Tile> tile = new ArrayList<>();
 
     public Paddle(double x, double y, Pane root, Color color) {
         for (int i = 0; i < LENGTH; i++) {
@@ -32,7 +35,7 @@ public class Paddle {
             this.movePaddle(500 - (int) tiles[0].getY());
     }
 
-    public boolean isIntersecting(Tile tile) { // Needs Refinement
+    public boolean isIntersecting(Tile tile) { // Needs Refinement, dectects if a tile is intersecting with the paddle.
         return (tile.getX() > tiles[0].getX() && tile.getX() < tiles[0].getX() + 10) && (tile.getY() > tiles[0].getY() && tile.getY() < tiles[LENGTH-1].getY());
     }
 }
