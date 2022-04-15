@@ -2,7 +2,7 @@ package gui;
 
 import javafx.scene.shape.Rectangle;
 
-public class Tile extends Rectangle { // needs extends rectangle to act like a node to be added to the root
+public class Tile extends Rectangle { // needs "extends rectangle" to act like a node to be added to the root
     public Tile(double x, double y) {
         super(x, y, 10, 10);
     }
@@ -13,7 +13,7 @@ public class Tile extends Rectangle { // needs extends rectangle to act like a n
         this.relocate(this.getX(), this.getY());
     }
 
-    public void reset() { // resets balls to center of screen
+    public void reset() { // resets ball to center of screen
         this.setX(625);
         this.setY(300);
     }

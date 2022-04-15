@@ -61,7 +61,6 @@ public class Main extends Application {
 
                     if (ball.getX() > 1240) { // Checks if ball is scored for player 2
                         xDirection *= -1;
-                        yDirection = (1 - (gen.nextInt(2) * 2));
                         ball.reset();
                         ballSpeed = 1;
                         player2Score++;
@@ -72,7 +71,6 @@ public class Main extends Application {
 
                     if (player1.isIntersecting(ball) || player2.isIntersecting(ball)) { // Paddle collision detection
                         xDirection *= -1;
-                        yDirection *= gen.nextDouble() + (gen.nextInt(2)); // Adds randomness to ball bounce
                         ball.move(xDirection * 3, 0);
                         ballSpeed *= 1.1;
                     }
@@ -86,24 +84,17 @@ public class Main extends Application {
                 }
             };
 
-            scene.setOnKeyPressed(event -> { // Movement for player 2
+            scene.setOnKeyPressed(event -> { // Movement for players
                 switch(event.getCode()) {
                     case W: player2.movePaddle(-10); break;
                     case S: player2.movePaddle(10); break;
                     case UP: player1.movePaddle(-10); break;
                     case DOWN: player1.movePaddle(10); break;
-                    case H: player1Score++; break;
+//                    case J: player1Score++; break; // Enable for score testing
+//                    case H: player2Score++; break;
                     default: break;
                 }
             });
-
-//        scene.setOnMouseMoved(event -> { // Movement for player 1
-//            if (event.getY() > player1.getY())
-//                player1.movePaddle(5);
-//
-//            if (event.getY() < player1.getY())
-//                player1.movePaddle(-5);
-//        });
 
             gameLoop.start(); // Starts ball movement
 

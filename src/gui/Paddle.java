@@ -35,7 +35,7 @@ public class Paddle {
             this.movePaddle(500 - (int) tiles[0].getY());
     }
 
-    public boolean isIntersecting(Tile tile) { // Needs Refinement, dectects if a tile is intersecting with the paddle.
+    public boolean isIntersecting(Tile tile) { // Needs Refinement, detects if a tile is intersecting with the paddle.
         return (tile.getX() > tiles[0].getX() && tile.getX() < tiles[0].getX() + 10) && (tile.getY() > tiles[0].getY() && tile.getY() < tiles[LENGTH-1].getY());
     }
 }
